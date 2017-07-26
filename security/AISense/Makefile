@@ -2,7 +2,7 @@
 
 PORTNAME=	AISense
 DISTVERSION=	2.3.2
-PORTREVISION=	2
+PORTREVISION=   2	
 CATEGORIES=	security
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -90,7 +90,6 @@ RUN_DEPENDS+=	${LOCALBASE}/sbin/dmidecode:sysutils/dmidecode \
 .endif
 
 RUN_DEPENDS+=	${PHPBASE}/lib/php/${PHP_EXT_DIR}/AISense.so:devel/php56-AISense-module \
-		${PHPBASE}/lib/php/${PHP_EXT_DIR}/AISense.so:devel/php56-AISense-module \
 		${PHPBASE}/lib/php/${PHP_EXT_DIR}/ssh2.so:security/pecl-ssh2 \
 		${PHPBASE}/lib/php/${PHP_EXT_DIR}/suhosin.so:security/php-suhosin \
 		${PHPBASE}/lib/php/${PHP_EXT_DIR}/xdebug.so:devel/php-xdebug \
