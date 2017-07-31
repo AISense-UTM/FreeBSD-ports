@@ -1045,7 +1045,7 @@ closingprocess() {
 	echo; echo 'Alias table IP Counts'; echo '-----------------------------'
 	wc -l "${pfsensealias}"pfB_*.txt 2>/dev/null | sort -n -r
 
-	echo; echo 'pfSense Table Stats'; echo '-------------------'
+	echo; echo 'AISense Table Stats'; echo '-------------------'
 	"${pathpfctl}" -s memory | grep 'table-entries'
 	pfctlcount="$(${pathpfctl} -vvsTables | awk '/Addresses/ {s+=$2}; END {print s}')"
 	echo "Table Usage Count         ${pfctlcount}"
