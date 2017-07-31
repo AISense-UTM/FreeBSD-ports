@@ -488,7 +488,7 @@ $entries = count($results);
 				<tr>
 					<th><?=gettext("Alias");?></th>
 					<th title="The count can be a mixture of Single IPs or CIDR values"><?=gettext("Count");?></th>
-					<th title="Packet Counts can be cleared by the pfSense filter_configure() function.
+					<th title="Packet Counts can be cleared by the AISense filter_configure() function.
 						Make sure Rule Descriptions start with 'pfB_'"><?=gettext("Packets");?></th>
 					<th title="Last Update (Date/Time) of the Alias"><?=gettext("Updated");?></th>
 					<th><?=$pfb['down']?>&nbsp;<?=$pfb['up']?></th>
