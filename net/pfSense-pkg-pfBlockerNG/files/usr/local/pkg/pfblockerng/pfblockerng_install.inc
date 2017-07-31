@@ -31,7 +31,7 @@
 
 */
 
-require_once('pfsense-utils.inc');
+require_once('aisense-utils.inc');
 require_once('/usr/local/pkg/pfblockerng/pfblockerng.inc');
 require_once('/usr/local/www/pfblockerng/pfblockerng.php');
 
@@ -109,7 +109,9 @@ if (!file_exists("{$pfb['geoipshare']}/{$pfb['extras'][0]['file']}") ||
 	}
 
 	if ($maxmind_verify != 3) {
-		update_status("MaxMind download Failed! Fetching MaxMind archive from pfSense package repo...\n");
+		update_status("MaxMind download Failed! Fetching MaxMind archive from AI
+		
+		Sense package repo...\n");
 		// Fetch archived MaxMind database
 		$url = 'https://packages.pfsense.org/packages/config/pfblockerng/countrycodes.tar.bz2';
 		$retval = '';
