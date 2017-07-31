@@ -47,7 +47,7 @@
 require_once('globals.inc');
 require_once('config.inc');
 require_once('util.inc');
-require_once('pfsense-utils.inc');
+require_once('aisense-utils.inc');
 require_once('pkg-utils.inc');
 require_once('filter.inc');
 require_once('service-utils.inc');
@@ -2362,110 +2362,4 @@ function scan_blacklist_cat($curdir, $key_name, &$cat_array)
         $files = scan_dir($curdir);
 
         foreach($files as $fls) {
-            $fls_file = "$curdir/$fls";
-
-            if (($fls != ".") and ($fls != "..")) {
-                if (is_file($fls_file)) {
-
-                     # add files path
-                     switch(strtolower($fls)) {
-                         case "domains":
-                             $blk_entry["domains"] = $fls_file;
-                             $blk_entry["path"]    = $curdir;
-                             break;
-                         case "urls":
-                             $blk_entry["urls"] = $fls_file;
-                             $blk_entry["path"]    = $curdir;
-                             break;
-                         case "expressions":
-                             $blk_entry["expressions"] = $fls_file;
-                             $blk_entry["path"]    = $curdir;
-                             break;
-                     }
-                 }
-                 elseif (is_dir($fls_file)) {
-                     $fls_key = $key_name . "_" . $fls;
-
-                     # recursive call
-                     scan_blacklist_cat($fls_file, $fls_key, $cat_array);
-                 }
-            }
-        }
-
-        if (count($blk_entry))
-            $cat_array[$key_name] = $blk_entry;
-    }
-}
-
-# =============================================================================
-# Blacklist Scripts
-# =============================================================================
-
-# squidGuard blacklist update php script
-function squidguard_script_blacklistupdate($fname, $opt)
-{
-    $sh[] = "#!/usr/local/bin/php-cgi -f";
-    $sh[] = "<?php";
-    $sh[] = "    \$incl = \"/usr/local/pkg/squidguard_configurator.inc\";";
-    $sh[] = "    if (file_exists(\$incl)) {";
-    $sh[] = "        require_once(\$incl);";
-    $sh[] = "        sg_reconfigure_blacklist( \"{$fname}\", \"{$opt}\" );";
-    $sh[] = "    }";
-    $sh[] = "    exit;";
-    $sh[] = "?>";
-    return implode ("\n", $sh);
-}
-
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# classes
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-class TSgTag
-{
-    var $tag;
-    var $name;
-    var $time;
-    var $items;
-    var $desc;
-
-    function __construct() {
-        $this->clear();
-    }
-
-    function clear() {
-        $this->tag    = '';
-        $this->name   = '';
-        $this->time   = '';
-        $this->items  = array();
-        $this->desc   = '';
-    }
-
-    function set($tag, $name, $time, $desc) {
-        $this->tag    = $tag;
-        $this->name   = $name;
-        $this->time   = $time;
-        $this->desc   = $desc;
-    }
-
-    function tag_text($offset = 0) {
-        $str = array();
-        $off = str_repeat("\t", $offset);
-
-        $str[] = $off . "# {$this->desc}";
-        if (empty($this->time))
-             $str[] = $off . "{$this->tag} {$this->name} {";
-        else $str[] = $off . "{$this->tag} {$this->name} within {$this->time} {";
-
-        # get items
-        foreach($this->items as $it) {
-            if (is_a($it, "TSgTag"))
-                $str[] = $off . $it->tag_text($offset + 1); # sub tag
-            else $str[] = $off . "\t{$it}";                  # item
-        }
-
-        $str[] = $off . "}";
-        return implode("\n", $str);
-    }
-}
-
-?>
+            $fls_file = 
